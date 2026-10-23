@@ -1,0 +1,409 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gelato Doce - Sorveteria</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fffaf5;
+            color: #402b32;
+        }
+
+        header {
+            background: #ff6b81;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            color: white;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 18px;
+            font-weight: bold;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 85px 20px;
+            background: linear-gradient(135deg, #ffe0e6, #fff0c9);
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 6vw, 52px);
+            color: #d83d62;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 25px;
+        }
+
+        .botao {
+            display: inline-block;
+            background: #e94e70;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .botao:hover {
+            background: #c83255;
+        }
+
+        section {
+            padding: 55px 8%;
+        }
+
+        .titulo {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 35px;
+            color: #d83d62;
+        }
+
+        .produtos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 25px;
+        }
+
+        .produto {
+            background: white;
+            padding: 25px 20px;
+            text-align: center;
+            border-radius: 18px;
+            box-shadow: 0 5px 18px #00000010;
+            transition: transform 0.2s;
+        }
+
+        .produto:hover {
+            transform: translateY(-5px);
+        }
+
+        .emoji {
+            font-size: 65px;
+            margin-bottom: 15px;
+        }
+
+        .produto h3 {
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        .produto p {
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .preco {
+            display: block;
+            color: #d83d62;
+            font-size: 23px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .sobre {
+            text-align: center;
+            background: #fff0f3;
+            line-height: 1.8;
+        }
+
+        .carrinho {
+            background: white;
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px #00000010;
+        }
+
+        .item-carrinho {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .remover {
+            background: #eee;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .total {
+            font-size: 23px;
+            font-weight: bold;
+            margin: 22px 0;
+            text-align: right;
+        }
+
+        .vazio {
+            text-align: center;
+            color: #777;
+        }
+
+        footer {
+            background: #402b32;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 500px) {
+            header {
+                justify-content: center;
+                text-align: center;
+            }
+
+            nav a {
+                margin: 0 7px;
+            }
+
+            section {
+                padding: 40px 5%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">🍦 Gelato Doce</div>
+        <nav>
+            <a href="#inicio">Início</a>
+            <a href="#cardapio">Cardápio</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#carrinho">Carrinho 🛒</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="inicio">
+            <h1>Uma felicidade chamada sorvete!</h1>
+            <p>Sabores incríveis para deixar seu dia mais doce.</p>
+            <a href="#cardapio" class="botao">Ver nossos sorvetes</a>
+        </section>
+
+        <section id="cardapio">
+            <h2 class="titulo">Nosso Cardápio 🍨</h2>
+
+            <div class="produtos">
+
+                <article class="produto">
+                    <div class="emoji">🍦</div>
+                    <h3>Sorvete de Baunilha</h3>
+                    <p>Cremoso, suave e delicioso.</p>
+                    <span class="preco">R$ 6,00</span>
+                    <button class="botao"
+                        onclick="adicionar('Sorvete de Baunilha', 6)">
+                        Adicionar
+                    </button>
+                </article>
+
+                <article class="produto">
+                    <div class="emoji">🍫</div>
+                    <h3>Chocolate</h3>
+                    <p>Para quem ama chocolate de verdade.</p>
+                    <span class="preco">R$ 8,00</span>
+                    <button class="botao"
+                        onclick="adicionar('Chocolate', 8)">
+                        Adicionar
+                    </button>
+                </article>
+
+                <article class="produto">
+                    <div class="emoji">🍓</div>
+                    <h3>Morango</h3>
+                    <p>Doce, refrescante e irresistível.</p>
+                    <span class="preco">R$ 7,00</span>
+                    <button class="botao"
+                        onclick="adicionar('Morango', 7)">
+                        Adicionar
+                    </button>
+                </article>
+
+                <article class="produto">
+                    <div class="emoji">🍨</div>
+                    <h3>Milk-shake</h3>
+                    <p>Uma bebida gelada e cremosa.</p>
+                    <span class="preco">R$ 12,00</span>
+                    <button class="botao"
+                        onclick="adicionar('Milk-shake', 12)">
+                        Adicionar
+                    </button>
+                </article>
+
+                <article class="produto">
+                    <div class="emoji">🍧</div>
+                    <h3>Açaí</h3>
+                    <p>Uma delícia para refrescar seu dia.</p>
+                    <span class="preco">R$ 10,00</span>
+                    <button class="botao"
+                        onclick="adicionar('Açaí', 10)">
+                        Adicionar
+                    </button>
+                </article>
+
+                <article class="produto">
+                    <div class="emoji">🍌</div>
+                    <h3>Banana Split</h3>
+                    <p>Banana, sorvete e muita cobertura.</p>
+                    <span class="preco">R$ 15,00</span>
+                    <button class="botao"
+                        onclick="adicionar('Banana Split', 15)">
+                        Adicionar
+                    </button>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="sobre" id="sobre">
+            <h2 class="titulo">Sobre Nós 💗</h2>
+            <p>
+                Na Gelato Doce, cada sorvete é preparado para transformar
+                momentos simples em lembranças deliciosas.
+                Venha experimentar nossos sabores!
+            </p>
+        </section>
+
+        <section id="carrinho">
+            <h2 class="titulo">Seu Carrinho 🛒</h2>
+
+            <div class="carrinho">
+                <div id="itens">
+                    <p class="vazio">Seu carrinho está vazio.</p>
+                </div>
+
+                <div class="total">
+                    Total: R$ <span id="total">0,00</span>
+                </div>
+
+                <button class="botao" onclick="finalizarPedido()">
+                    Pedir pelo WhatsApp
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>🍦 Gelato Doce - Sorveteria</p>
+        <p>Feito com ❤️ para adoçar seu dia!</p>
+        <p>&copy; 2026 Gelato Doce. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        const carrinho = [];
+
+        function adicionar(nome, preco) {
+            carrinho.push({ nome, preco });
+            atualizarCarrinho();
+        }
+
+        function remover(index) {
+            carrinho.splice(index, 1);
+            atualizarCarrinho();
+        }
+
+        function atualizarCarrinho() {
+            const itens = document.getElementById("itens");
+            const totalElemento = document.getElementById("total");
+
+            if (carrinho.length === 0) {
+                itens.innerHTML =
+                    '<p class="vazio">Seu carrinho está vazio.</p>';
+            } else {
+                itens.innerHTML = carrinho.map((item, index) => `
+                    <div class="item-carrinho">
+                        <span>${item.nome} - ${formatar(item.preco)}</span>
+                        <button class="remover"
+                            onclick="remover(${index})">
+                            Remover
+                        </button>
+                    </div>
+                `).join("");
+            }
+
+            const total = carrinho.reduce(
+                (soma, item) => soma + item.preco, 0
+            );
+
+            totalElemento.textContent = total.toFixed(2).replace(".", ",");
+        }
+
+        function formatar(valor) {
+            return valor.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            });
+        }
+
+        function finalizarPedido() {
+            if (carrinho.length === 0) {
+                alert("Adicione algum produto ao carrinho primeiro!");
+                return;
+            }
+
+            const numeroWhatsApp = ""; // Coloque seu número com DDI e DDD
+            const total = carrinho.reduce(
+                (soma, item) => soma + item.preco, 0
+            );
+
+            let mensagem = "Olá! Quero fazer este pedido:\n\n";
+
+            carrinho.forEach(item => {
+                mensagem += `- ${item.nome}: ${formatar(item.preco)}\n`;
+            });
+
+            mensagem += `\nTotal: ${formatar(total)}`;
+
+            if (!numeroWhatsApp) {
+                alert(
+                    "O site está funcionando! Para enviar pedidos, " +
+                    "configure o número de WhatsApp no código."
+                );
+                return;
+            }
+
+            const url = "https://wa.me/" + numeroWhatsApp +
+                "?text=" + encodeURIComponent(mensagem);
+
+            window.open(url, "_blank");
+        }
+    </script>
+
+</body>
+</html>
